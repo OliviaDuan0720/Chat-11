@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>减肥监督聊天 App 原型</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="phone" aria-label="减肥监督聊天 App 原型">
+        <header class="topbar">
+          <div class="role-identity">
+            <div id="headerAvatar" class="avatar-frame avatar-small" aria-hidden="true"></div>
+            <div>
+              <p id="headerRole" class="role-name">皇上模式</p>
+              <p id="headerSub" class="role-subtitle">御膳房总管在线伺候</p>
+            </div>
+          </div>
+          <button id="roleSwitchBtn" class="icon-button" type="button" aria-label="切换角色">
+            <span class="switch-icon" aria-hidden="true"></span>
+          </button>
+        </header>
+
+        <section id="tabChat" class="screen screen-active" aria-label="聊天">
+          <div id="chatList" class="chat-list"></div>
+
+          <div class="quick-actions" aria-label="快捷记录">
+            <button type="button" data-quick="今天 58.6kg">体重</button>
+            <button type="button" data-quick="中午吃了麻辣烫">饮食</button>
+            <button type="button" data-quick="晚上走了 5000 步">运动</button>
+            <button type="button" data-quick="今天生理期第一天">生理期</button>
+            <button class="pro-quick" type="button" data-pro-photo>拍照分析</button>
+          </div>
+
+          <form id="chatForm" class="composer">
+            <input id="foodPhotoInput" type="file" accept="image/*" hidden />
+            <input
+              id="chatInput"
+              type="text"
+              autocomplete="off"
+              placeholder="像发微信一样记录：今天吃了什么？"
+              aria-label="输入聊天内容"
+            />
+            <button class="send-button" type="submit">发送</button>
+          </form>
+        </section>
+
+        <section id="tabTasks" class="screen" aria-label="任务">
+          <div class="page-title">
+            <div>
+              <p class="eyebrow">今日安排</p>
+              <h1>任务复命处</h1>
+            </div>
+            <span id="taskProgressPill" class="progress-pill">0/0</span>
+          </div>
+          <div id="taskList" class="task-list"></div>
+        </section>
+
+        <section id="tabRecords" class="screen" aria-label="记录">
+          <div class="page-title">
+            <div>
+              <p class="eyebrow">本周概览</p>
+              <h1>记录小本本</h1>
+            </div>
+            <span id="streakPill" class="progress-pill">连续 1 天</span>
+          </div>
+
+          <div class="record-grid">
+            <article class="stat-card">
+              <span>当前体重</span>
+              <strong id="currentWeight">58.6kg</strong>
+              <small id="weightDelta">比上次轻 0.2kg</small>
+            </article>
+            <article class="stat-card">
+              <span>今日运动</span>
+              <strong id="currentSteps">5000 步</strong>
+              <small>还差一点点就能交差</small>
+            </article>
+            <article class="stat-card">
+              <span>目标体重</span>
+              <strong id="targetWeightText">55.0kg</strong>
+              <small id="targetGapText">还差 3.6kg</small>
+            </article>
+          </div>
+
+          <article class="record-section">
+            <div class="section-heading">
+              <h2>体重曲线</h2>
+              <span id="chartTargetLabel">目标 55.0kg</span>
+            </div>
+            <div id="weightChart" class="mini-chart" aria-label="体重趋势图"></div>
+          </article>
+
+          <article class="record-section">
+            <div class="section-heading">
+              <h2>饮食记录</h2>
+              <span id="foodCount">0 条</span>
+            </div>
+            <div id="foodRecords" class="record-list"></div>
+          </article>
+
+          <article class="record-section">
+            <div class="section-heading">
+              <h2>运动记录</h2>
+              <span id="exerciseCount">0 条</span>
+            </div>
+            <div id="exerciseRecords" class="record-list"></div>
+          </article>
+
+          <article class="period-card">
+            <div>
+              <span>生理期提醒</span>
+              <strong id="periodText">暂未记录</strong>
+              <small id="periodHint">记录后会在下个月相近时间前 1-2 天温和提醒。</small>
+            </div>
+          </article>
+        </section>
+
+        <section id="tabMine" class="screen" aria-label="我的">
+          <div class="profile-hero">
+            <div id="mineAvatar" class="avatar-frame avatar-large" aria-hidden="true"></div>
+            <div>
+              <p class="eyebrow">当前监督员</p>
+              <h1 id="mineRole">皇上模式</h1>
+              <p id="mineDesc">奴才式伺候，专治晚饭放飞。</p>
+            </div>
+          </div>
+
+          <article class="premium-card">
+            <div>
+              <p class="eyebrow">VIP 专业版</p>
+              <h2>9.9 元 / 月</h2>
+              <p>解锁拍照估算卡路里、真实饮食评价、每餐优化建议和目标进度分析。</p>
+            </div>
+            <button id="membershipBtn" class="premium-button" type="button">开通会员</button>
+            <span id="membershipStatus" class="premium-status">当前免费版</span>
+          </article>
+
+          <article class="settings-section">
+            <div class="section-heading">
+              <h2>目标体重</h2>
+              <span id="targetProgressText">还差 3.6kg</span>
+            </div>
+            <label class="target-setting">
+              <span>目标 kg</span>
+              <input id="targetWeightInput" type="number" min="35" max="120" step="0.1" value="55.0" />
+            </label>
+          </article>
+
+          <article class="settings-section">
+            <div class="section-heading">
+              <h2>提醒设置</h2>
+              <span>可关闭</span>
+            </div>
+            <div id="reminderList" class="reminder-list"></div>
+          </article>
+
+          <article class="settings-section">
+            <div class="section-heading">
+              <h2>角色切换</h2>
+              <span>7 个</span>
+            </div>
+            <div id="roleGrid" class="role-grid"></div>
+          </article>
+
+        </section>
+
+        <nav class="bottom-tabs" aria-label="底部导航">
+          <button class="tab-button tab-active" type="button" data-tab="Chat" aria-label="聊天">
+            <span class="tab-icon icon-chat" aria-hidden="true"></span>
+            <span>聊天</span>
+          </button>
+          <button class="tab-button" type="button" data-tab="Tasks" aria-label="任务">
+            <span class="tab-icon icon-task" aria-hidden="true"></span>
+            <span>任务</span>
+          </button>
+          <button class="tab-button" type="button" data-tab="Records" aria-label="记录">
+            <span class="tab-icon icon-record" aria-hidden="true"></span>
+            <span>记录</span>
+          </button>
+          <button class="tab-button" type="button" data-tab="Mine" aria-label="我的">
+            <span class="tab-icon icon-mine" aria-hidden="true"></span>
+            <span>我的</span>
+          </button>
+        </nav>
+      </section>
+
+      <aside class="desktop-notes" aria-label="原型说明">
+        <p class="eyebrow">V1 Prototype</p>
+        <h2>微信式 AI 减肥监督</h2>
+        <p>
+          这是一个可点击 H5 原型。试着在聊天里输入“今天 58.6kg”“吃了炸鸡奶茶”“走了 5000 步”“生理期第一天”，看看角色如何回复。
+        </p>
+        <div class="note-card">
+          <strong>当前重点</strong>
+          <span>验证聊天记录、角色监督、搞笑表情包和任务复命是否顺。</span>
+        </div>
+      </aside>
+    </main>
+
+    <div id="roleSheet" class="sheet" aria-hidden="true">
+      <div class="sheet-backdrop" data-close-sheet></div>
+      <section class="sheet-panel" aria-label="选择监督角色">
+        <div class="sheet-handle"></div>
+        <div class="section-heading">
+          <h2>选择监督角色</h2>
+          <button class="text-button" type="button" data-close-sheet>关闭</button>
+        </div>
+        <div id="sheetRoleGrid" class="role-grid"></div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
